@@ -1,0 +1,40 @@
+{
+  "workers": 2,
+  "jobs": [
+    {
+      "name": "page-alert",
+      "cmd": ["sh", "-c", "sleep 0.3"],
+      "every": "1s",
+      "deadline": "1500ms",
+      "hint": "300ms",
+      "curve": { "kind": "step", "value": 100 },
+      "droppable": true
+    },
+    {
+      "name": "reconcile",
+      "cmd": ["sh", "-c", "sleep 1.2"],
+      "every": "2s",
+      "deadline": "6s",
+      "hint": "1200ms",
+      "curve": { "kind": "linear", "value": 60, "grace": "8s", "floor": 0.1 }
+    },
+    {
+      "name": "report",
+      "cmd": ["sh", "-c", "sleep 1.5"],
+      "every": "2s",
+      "deadline": "5s",
+      "hint": "1500ms",
+      "curve": { "kind": "linear", "value": 20, "grace": "6s" },
+      "droppable": true
+    },
+    {
+      "name": "thumbnail",
+      "cmd": ["sh", "-c", "sleep 0.2"],
+      "every": "500ms",
+      "deadline": "1s",
+      "hint": "200ms",
+      "curve": { "kind": "exp", "value": 3, "grace": "2s" },
+      "droppable": true
+    }
+  ]
+}
